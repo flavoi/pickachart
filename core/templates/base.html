@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>{% block title %}{% endblock %}</title>
 	{% block extrastyle %}
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" media="screen" />	
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />	
 	<script type="text/javascript" src="{{ STATIC_URL }}js/accordian.pack.js"></script>
 	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon/wc.ico">
 	{% endblock %}
@@ -15,8 +15,8 @@
 {% load i18n %}
 <body onload="new Accordian('accordian',3,'header_highlight');">
 <div id="header">
-<h1><a href="{% url 'home' %}">WebChart</a></h1>
-<h2>Versione 1.2</h2>
+<h1><a href="{% url 'home' %}">Pick a chart!</a></h1>
+<h2>Versione 0.2</h2>
 
 </div>
 <div id="accordian" >

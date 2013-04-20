@@ -51,7 +51,7 @@ def define_data(request, id, idupdate):
 		return HttpResponse(status=201)
 	form = ChartForm(instance = chart)
 	
-	update_data = {'yvalues': '1 2 3 ', 'labels': 'a b c'}
+	update_data = {'yvalues': '1 2 3', 'labels': 'a b c'}
 	if idupdate:
 		pieces = Piece.objects.filter(chart = chart)
 		y = l = ''
