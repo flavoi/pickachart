@@ -5,8 +5,11 @@
 	<meta charset="utf-8">
 	<title>{% block title %}{% endblock %}</title>
 	{% block extrastyle %}
+
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="screen" />	
-	<script type="text/javascript" src="{{ STATIC_URL }}js/accordian.pack.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+	
+    <script type="text/javascript" src="{{ STATIC_URL }}js/accordian.pack.js"></script>
 	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon/wc.ico">
 	{% endblock %}
 	{% block extrahead %}{% endblock %}

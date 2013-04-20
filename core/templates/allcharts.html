@@ -4,60 +4,49 @@
 {% endblock %}
 {% block content %}
 
-  <div class="google-header-bar">
-  </div>
+  <div class="google-header-bar"></div>
+
   <div class="main content clearfix">
+
   <div class="sign-in">
-	<div class="signin-box">
-	  <form method="link" action="{% url 'home' %}">
-	      <input type="submit" class="g-button g-button-orange" name="signIn" id="signIn" value="Torna alla Home">
+  <div class="signin-box">
+    <form method="link" action="{% url 'home' %}">
+        <input type="submit" class="g-button g-button-orange" name="signIn" id="signIn" value="Torna alla Home">
     </form>
   </div>
   </div>
-  <div class="product-info jotspot">
-<div class="product-headers">
-  <h1>Lista Completa Grafici</h1>
-</div>
-  <h3>Perch&eacute; questa lista?</h3>
-  <p>Spesso i grafici pi&ugrave; rivisti sono proprio gli ultimi. Separando questa lista dalla home alleggeriamo la pagina e rendiamo la lettura dei contenuti pi&ugrave; semplice. </p>
-<table class="sortable" id="rounded-corner" summary="Lista completa in dettaglio dei grafici prodotti">
+
+  <div class="product-headers">
+    <h1>Lista Completa Grafici</h1>
+  </div>
+
+  <h3><em>Numero totale: {{ count }}</em></h3>
+  
+  <table class="bordered">
     <thead>
     	<tr>
-			<th scope="col" class="rounded-company">ID</th>
-        	<th scope="col" class="rounded-company-q2">Titolo</th>
-            <th scope="col" class="rounded-q2">Stile</th>
-            <th scope="col" class="rounded-q3">Dimensioni</th>
-            <th scope="col" class="rounded-q4">Azione</th>
-        </tr>
+  		  <th scope="col" class="rounded-company">ID</th>
+        <th scope="col" class="rounded-company-q2">Titolo</th>
+        <th scope="col" class="rounded-q2">Stile</th>
+        <th scope="col" class="rounded-q3">Dimensioni</th>
+        <th scope="col" class="rounded-q4">Azione</th>
+      </tr>
     </thead>
-        <tfoot>
-    	<tr>
-        	<td colspan="4" class="rounded-foot-left"><em>Numero totale grafici: {{ count }}</em></td>
-        	<td class="rounded-foot-right">&nbsp;</td>
-        </tr>
-    </tfoot>
     <tbody>
-		{% for chart in charts %}
-		<tr>
-			<td>{{ chart.id }}</td>
-        	<td><a href="{% url 'visualize' chart.id chart.style %}">{{ chart.title|title }}</a></td>
-            <td>{% ifequal chart.style 'lc' %}linee
-			    {% else %}{% ifequal chart.style 'bvg'%}barre
-					      {% else %}{% ifequal chart.style 'mst'%}misto
-									{% endifequal %}
-						  {% endifequal %}
-				{% endifequal %} 
-			</td>
-            <td>{{ chart.width }}</td>
-            <td><a href="{% url 'update' chart.id %}">modifica</a></td>
+  		{% for chart in charts %}
+    		<tr>
+    			<td>{{ chart.id }}</td>
+          <td><a href="{% url 'visualize' chart.id chart.style %}">{{ chart.title|title }}</a></td>
+          <td>
+            {% ifequal chart.style 'lc' %}linee{% endifequal %}
+    			  {% ifequal chart.style 'bvg'%}barre{% endifequal %}
+    		    {% ifequal chart.style 'mst'%}misto{% endifequal %}
+  	     	</td>
+          <td>{{ chart.width }}</td>
+          <td><a href="{% url 'update' chart.id %}">modifica</a></td>
         </tr>
-		{% endfor %}
+  		{% endfor %}
     </tbody>
-</table>
+  </table>
   </div>
- </div>
- {% endblock %}
- 
-{% block message %}
-	Puoi ordinare la tabella cliccando sull'intestazione delle colonne!
-{% endblock %} 
+{% endblock %}
