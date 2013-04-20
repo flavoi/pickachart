@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}WebChart|Login{% endblock %}
+
+{% block content %}	
+<div id="test-header" class="accordion_headings header_highlight" >Salve!</div>
+<div id="test-content">
+<div class="accordion_child">
+		<div class="signin-box">
+  		<form id="gaia_loginform" action="{% url 'login' %}" method="POST" id="login-form">{% csrf_token %}
+  			<label>
+  				<strong class="email-label">Username</strong>
+  				<input {% if error_message %}class="form-error"{% endif %} type="text" name="username" />
+  			</label>
+  			<label>
+  				<strong class="passw-label">Password</strong>
+  				<input {% if error_message %}class="form-error"{% endif %} type="password" name="password"  />
+  				{% if error_message %}
+  				<span id="errormsg_0_Passwd" class="errormsg" role="alert">
+  					Username o password non corretti.
+  				</span>
+  				{% endif %}
+  			</label>
+        <label>
+          <p>Se non hai gi&agrave; un account, prova! Username: <b>prova</b> | Password: <b>prova</b>.</p>
+        </label>
+  			<input type="submit" class="g-button g-button-orange" value="Accedi" />
+  		</form>
+		</div>
+</div>
+</div>  
+{% endblock %}
+		

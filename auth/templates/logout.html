@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}WebChart|Logout{% endblock %}
+
+{% block content %}	
+ <div id="test-header" class="accordion_headings header_highlight" >Logout Effettuato</div>
+   <div id="test-content">
+    <div class="accordion_child">
+		<h2>Accesso Annullato</h2>
+		<hr />
+		<p><a href="{% url 'login' %}">Accedi di nuovo</a></p>
+	</div>
+  </div>
+{% endblock %}

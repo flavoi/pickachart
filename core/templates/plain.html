@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/plain.css" type="text/css" media="screen" />	
+<link rel="stylesheet" href="{{ STATIC_URL }}css/tables.css" type="text/css" media="screen" />
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon/favicon/wc.ico">
+<script src="{{ STATIC_URL }}js/sorttable.js"></script>  
+{% block extrahead %}
+{% endblock %}
+</head>
+
+<body>
+<div class="wrapper">
+	{% block content %}		
+	{% endblock %}
+
+	<div class="announce-bar">
+		<div class="content">
+			<p class="message">
+				{% block message %}
+				{% endblock %}
+			</p>
+		</div>
+	</div>			
+
+	<div class="google-footer-bar">
+		<div class="footer content clearfix">
+		<ul>
+		<li>&#169; 2012 Webchart</li>
+		<li>Powered By Google</li>
+		<li><a href="javascript:void(0)" class="image" onclick="window.open('https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=flavius476@gmail.com','Compose new message','width=640,height=480')" rel="noreferrer">
+		Admin</a></li>
+		</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

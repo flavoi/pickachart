@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>{% block title %}{% endblock %}</title>
+	{% block extrastyle %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" media="screen" />	
+	<script type="text/javascript" src="{{ STATIC_URL }}js/accordian.pack.js"></script>
+	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon/wc.ico">
+	{% endblock %}
+	{% block extrahead %}{% endblock %}
+</head>
+
+{% load i18n %}
+<body onload="new Accordian('accordian',3,'header_highlight');">
+<div id="header">
+<h1><a href="{% url 'home' %}">WebChart</a></h1>
+<h2>Versione 1.2</h2>
+
+</div>
+<div id="accordian" >
+{% block content %}{% endblock %}
+</div>
+ 	
+<div class="google-footer-bar">
+  <div class="footer content clearfix">
+  <ul>
+  <li>&#169; 2012 Webchart</li>
+  <li>Powered By Google</li>
+  <li><a href="javascript:void(0)" class="image" onclick="window.open('https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=marcatofla@gmail.com','Compose new message','width=640,height=480')" rel="noreferrer">
+  Admin</a></li>
+  </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

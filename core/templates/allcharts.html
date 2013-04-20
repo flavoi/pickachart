@@ -1,0 +1,65 @@
+{% extends "plain.html" %}
+{% block extrahead %}
+  <title>Lista Grafici Completa</title>
+{% endblock %}
+{% block content %}
+
+  <div class="google-header-bar">
+  </div>
+  <div class="main content clearfix">
+  <div class="sign-in">
+	<div class="signin-box">
+	  <h2>Torna alla Home <strong></strong></h2>
+	  <form method="link" action="{% url 'home' %}">
+	  <input type="submit" class="g-button g-button-orange" name="signIn" id="signIn" value="Home">
+	  </form>
+	</div>
+	<img class="infographic" alt="" width="290" height="225" src="http://aux.iconpedia.net/uploads/1329724851.png">
+  </div>
+  <div class="product-info jotspot">
+<div class="product-headers">
+  <h1>Lista Completa Grafici</h1>
+</div>
+  <h3>Perch&eacute; questa lista?</h3>
+  <p>Spesso i grafici pi&ugrave; rivisti sono proprio gli ultimi. Separando questa lista dalla home alleggeriamo la pagina e rendiamo la lettura dei contenuti pi&ugrave; semplice. </p>
+<table class="sortable" id="rounded-corner" summary="Lista completa in dettaglio dei grafici prodotti">
+    <thead>
+    	<tr>
+			<th scope="col" class="rounded-company">ID</th>
+        	<th scope="col" class="rounded-company-q2">Titolo</th>
+            <th scope="col" class="rounded-q2">Stile</th>
+            <th scope="col" class="rounded-q3">Dimensioni</th>
+            <th scope="col" class="rounded-q4">Azione</th>
+        </tr>
+    </thead>
+        <tfoot>
+    	<tr>
+        	<td colspan="4" class="rounded-foot-left"><em>Numero totale grafici: {{ count }}</em></td>
+        	<td class="rounded-foot-right">&nbsp;</td>
+        </tr>
+    </tfoot>
+    <tbody>
+		{% for chart in charts %}
+		<tr>
+			<td>{{ chart.id }}</td>
+        	<td><a href="{% url 'visualize' chart.id chart.style %}">{{ chart.title|title }}</a></td>
+            <td>{% ifequal chart.style 'lc' %}linee
+			    {% else %}{% ifequal chart.style 'bvg'%}barre
+					      {% else %}{% ifequal chart.style 'mst'%}misto
+									{% endifequal %}
+						  {% endifequal %}
+				{% endifequal %} 
+			</td>
+            <td>{{ chart.width }}</td>
+            <td><a href="{% url 'update' chart.id %}">modifica</a></td>
+        </tr>
+		{% endfor %}
+    </tbody>
+</table>
+  </div>
+ </div>
+ {% endblock %}
+ 
+{% block message %}
+	Puoi ordinare la tabella cliccando sull'intestazione delle colonne!
+{% endblock %} 

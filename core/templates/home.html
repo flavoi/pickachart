@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}WebChart|Home{% endblock %}
+{% block content %}	
+
+{% if data %}
+<div id="test1-header" class="accordion_headings header_highlight" >Grafico prodotto</div>
+	<div id="test1-content">
+		<div class="accordion_child">
+			<h2>{{ data|capfirst }}</h2>
+				<ul>
+					<li>Dimensioni: {{ data.width|capfirst }}</li>
+				</ul>	
+			<img src="{{ chart_url }}" width="{{ chart_width }}" height="{{ chart_height }}" alt="{{ data.title|title }}" />
+		</div>
+	</div>
+{% else %}
+{% if user.is_authenticated %}
+<div id="test-header" class="accordion_headings" >Grafici e Credenziali</div>
+<div id="test-content">
+	<div class="accordion_child">
+		{% if user.is_superuser %}
+		<p><a href="/admin">Admin</a></p>
+		{% else %}
+			{% if currents %}
+			<p>Ecco gli ultimi grafici da te inseriti:</p>
+				<ul class="links">
+					{% for c in currents %}
+						<li><a href="{% url 'update' c.id %}">{{ c.title|title }}</a> - <a href="{% url 'visualize' c.id c.style %}">vedi grafico</a></li>
+					{% endfor %}
+				</ul>
+		{% endif  %}
+		<p><a href="{% url 'allcharts' %}">Visiona tutti i grafici</a></p>
+		{% endif %}
+
+		<p>Effettua il <a href="{% url 'logout' %}">LOGOUT</a></p>
+
+	</div>
+</div>
+{% endif  %}
+{% ifequal idupdate None %}
+<div id="test1-header" class="accordion_headings header_highlight" >Crea nuovo grafico</div>
+<div id="test1-content">
+	<div class="accordion_child">
+		<form action="{% url 'home' %}" method="POST">{% csrf_token %}
+{% else %}
+<div id="test1-header" class="accordion_headings header_highlight" >Modifica grafico</div>
+<div id="test1-content">
+	<div class="accordion_child">
+		<form action="{% url 'update' idupdate %}" method="POST">{% csrf_token %}
+{% endifequal %}
+			<table >
+				<tbody>
+				{% for field in form %}
+					<tr>
+						<td style="text-align:left;">{{ field.label_tag }}</td>
+						
+						<td style="text-align:left;">{{ field }}</td>
+						
+						{% if field.errors %}<td><font style="BACKGROUND-COLOR: yellow"><b><em>{{ field.errors|striptags }}</em></b></font></td>{% endif %}
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<input type="submit" class="g-button g-button-orange" value="Avanti">
+		</form>
+	</div>
+</div>
+{% endif %}
+<!--
+{% if formset %}
+	<div id="test2-header" class="accordion_headings header_highlight" >Dati</div>
+	<div id="test2-content">
+		<div class="accordion_child">
+			{% if idupdate %}
+				<form action="{% url defdata id idupdate %}", method="POST", style="display:inline">
+			{% else %}	
+				<form action="{% url defdata id 0 %}", method="POST", style="display:inline">{% endif %}{% csrf_token %}
+					{{ formset.management_form }}
+					{% for form in formset.forms %}
+						<p>{{ form }}</p>
+					{% endfor %}
+					<br />
+					<input type="submit" id="salva" value="Salva"/>
+				</form>
+		</div>
+	</div>
+{% endif %}
+-->
+{% if form2 %}
+<div id="test2-header" class="accordion_headings header_highlight" >Dati</div>
+	<div id="test2-content">
+		<div class="accordion_child">
+			{% if idupdate %}
+				<form action="{% url 'defdata' id idupdate %}", method="POST", style="display:inline">
+			{% else %}	
+				<form action="{% url 'defdata' id 0 %}", method="POST", style="display:inline">{% endif %}{% csrf_token %}
+				<table>
+					{% for field in form2 %}
+					<tr>
+						<td style="text-align:left;">{{ field.help_text }}</td>
+						<td style="text-align:left;">{{ field }}</td>
+						{% if field.errors %}<td><font style="BACKGROUND-COLOR: yellow"><b><em>{{ field.errors|striptags }}</em></b></font></td>{% endif %}
+					</tr>
+					{% endfor %}
+				</table>
+					<br />
+					<input type="submit" class="g-button g-button-orange" id="salva" value="Salva"/>
+				</form>
+		</div>
+	</div>
+{% endif %}
+{% endblock %}
