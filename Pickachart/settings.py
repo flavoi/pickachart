@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 here = lambda * x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 PROJECT_ROOT = here("..")
@@ -6,25 +7,14 @@ root = lambda * x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
 LOGIN_REDIRECT_URL = '/home/'
 LOGIN_URL = '/login/'
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Flavio Marcato', 'marcatofla@gmail.com'),
 )
 
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'pickachart',                          
-        'USER': 'vagrant',                                      
-        'PASSWORD': 'latest0',                                  
-        'HOST': '',                                      
-        'PORT': '',                                  
-    }
-}  
+MANAGERS = ADMINS 
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -156,11 +146,20 @@ LOGGING = {
 }
 
 
-"""
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+if DEBUG == True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+            'NAME': 'pickachart',                          
+            'USER': 'vagrant',                                      
+            'PASSWORD': 'latest0',                                  
+            'HOST': '',                                      
+            'PORT': '',                                  
+        }
+    } 
+else:
+    # Parse database configuration from $DATABASE_URL
+    DATABASES['default'] =  dj_database_url.config()
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-"""
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
