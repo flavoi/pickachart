@@ -145,18 +145,16 @@ LOGGING = {
     }
 }
 
-
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-            'NAME': 'pickachart',                          
-            'USER': 'vagrant',                                      
-            'PASSWORD': 'latest0',                                  
-            'HOST': '',                                      
-            'PORT': '',                                  
-        }
-    } 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'pickachart',                          
+        'USER': 'vagrant',                                      
+        'PASSWORD': 'latest0',                                  
+        'HOST': '',                                      
+        'PORT': '',                                  
+    }
+} 
 
 if DEBUG == False:
     # Parse database configuration from $DATABASE_URL
