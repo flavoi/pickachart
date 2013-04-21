@@ -146,7 +146,7 @@ LOGGING = {
 }
 
 
-if DEBUG == True:
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', 
@@ -157,7 +157,8 @@ if DEBUG == True:
             'PORT': '',                                  
         }
     } 
-else:
+
+if DEBUG == False:
     # Parse database configuration from $DATABASE_URL
     DATABASES['default'] =  dj_database_url.config()
 
